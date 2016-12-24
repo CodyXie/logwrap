@@ -3,18 +3,21 @@
 all : liblogwrap_static liblogwrap logwarpper
 
 CURDIR=$(shell pwd)
-CFLAGS += -Werror -fPIC -fpie -I$(CURDIR)/include
-LDFLAGS+= -lpthread
+CFLAGS += -fpie -fPIC -I$(CURDIR)/include
+CPPFLAGS+=$(CFLAGS)
+CPPFLAGS+= -std=c++11
+LDFLAGS+= -lpthread -lstdc++
 
 OBJS:=$(patsubst %.c, %.o, $(filter-out logwrapper.c, $(wildcard *.c)))
+OBJS+=$(patsubst %.cpp, %.o, $(wildcard *.cpp))
 EXEOBJS:=$(OBJS)
 EXEOBJS+=logwrapper.o
 
 %.o : %.c
-	$(CC) $(CFLAGS) -fPIC -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 %.o : %.cpp
-	$(CC) $(CPPFLAGS) -fPIC -c $< -o $@
+	$(CC) $(CPPFLAGS) -c $< -o $@
 
 liblogwrap_static : $(OBJS)
 	$(AR) -rcs $@.a $^
