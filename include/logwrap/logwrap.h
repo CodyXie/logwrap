@@ -20,6 +20,7 @@
 
 #include <stdbool.h>
 
+#include "alog.h"
 __BEGIN_DECLS
 
 /*
@@ -81,6 +82,9 @@ static inline int android_fork_execvp(int argc, char* argv[], int *status,
     return android_fork_execvp_ext(argc, argv, status, ignore_int_quit,
                                    (logwrap ? LOG_ALOG : LOG_NONE), false, NULL);
 }
+
+#define os_fork_execvp_ext android_fork_execvp_ext
+#define os_fork_execvp android_fork_execvp
 
 __END_DECLS
 

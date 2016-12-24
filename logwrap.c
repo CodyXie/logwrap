@@ -29,9 +29,6 @@
 #include <pthread.h>
 
 #include <logwrap/logwrap.h>
-#include "private/android_filesystem_config.h"
-#include "cutils/log.h"
-#include <cutils/klog.h>
 
 #define ARRAY_SIZE(x)   (sizeof(x) / sizeof(*(x)))
 #define MIN(a,b) (((a)<(b))?(a):(b))
@@ -311,7 +308,7 @@ static int parent(const char *tag, int parent_read, pid_t pid,
     bool found_child = false;
     char tmpbuf[256];
 
-    log_info.btag = basename(tag);
+    log_info.btag = basename((char *)tag);
     if (!log_info.btag) {
         log_info.btag = (char*) tag;
     }

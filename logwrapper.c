@@ -17,13 +17,12 @@
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 #include <sys/wait.h>
 #include <unistd.h>
 
 #include <logwrap/logwrap.h>
-#include <cutils/klog.h>
-
-#include "cutils/log.h"
+#include <logwrap/klog.h>
 
 void fatal(const char *msg) {
     fprintf(stderr, "%s", msg);
@@ -80,7 +79,7 @@ int main(int argc, char* argv[]) {
         usage();
     }
 
-    rc = android_fork_execvp_ext(argc, &argv[0], &status, true,
+    rc = os_fork_execvp_ext(argc, &argv[0], &status, true,
                                  log_target, abbreviated, NULL);
     if (!rc) {
         if (WIFEXITED(status))
