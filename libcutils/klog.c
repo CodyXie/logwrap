@@ -23,7 +23,7 @@
 #include <string.h>
 #include <unistd.h>
 
-#include <logwrap/klog.h>
+#include <cutils/klog.h>
 
 static int klog_fd = -1;
 static int klog_level = KLOG_DEFAULT_LEVEL;
@@ -56,6 +56,7 @@ void klog_init(void)
 void klog_vwrite(int level, const char *fmt, va_list ap)
 {
     char buf[LOG_BUF_MAX];
+    size_t len;
 
     if (level > klog_level) return;
     if (klog_fd < 0) klog_init();
@@ -64,7 +65,7 @@ void klog_vwrite(int level, const char *fmt, va_list ap)
     vsnprintf(buf, LOG_BUF_MAX, fmt, ap);
     buf[LOG_BUF_MAX - 1] = 0;
 
-    write(klog_fd, buf, strlen(buf));
+    len = write(klog_fd, buf, strlen(buf));
 }
 
 void klog_write(int level, const char *fmt, ...)

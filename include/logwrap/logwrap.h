@@ -20,7 +20,7 @@
 
 #include <stdbool.h>
 
-#include "alog.h"
+#include <logwrap/alog.h>
 __BEGIN_DECLS
 
 /*

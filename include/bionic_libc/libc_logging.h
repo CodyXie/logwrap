@@ -61,6 +61,8 @@ __BEGIN_DECLS
 
 #include "libc_events.h"
 
+#ifdef BIONIC_LIBC
+
 enum {
   ANDROID_LOG_UNKNOWN = 0,
   ANDROID_LOG_DEFAULT,    /* only for SetMinPriority() */
@@ -86,6 +88,8 @@ enum {
 
   LOG_ID_MAX
 };
+
+#endif
 
 struct abort_msg_t {
   size_t size;

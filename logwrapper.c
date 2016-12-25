@@ -21,8 +21,12 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
+#ifndef __ANDROID__
+#include <bionic_libc/libc_logging.h>
+#endif
+
 #include <logwrap/logwrap.h>
-#include <logwrap/klog.h>
+#include <cutils/klog.h>
 
 void fatal(const char *msg) {
     fprintf(stderr, "%s", msg);

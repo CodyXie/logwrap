@@ -3,7 +3,7 @@
 all : liblogwrap_static liblogwrap logwarpper
 
 CURDIR=$(shell pwd)
-CFLAGS += -fpie -fPIC -I$(CURDIR)/include
+CFLAGS += -Werror -fpie -fPIC -I$(CURDIR)/include
 CPPFLAGS+=$(CFLAGS)
 CPPFLAGS+= -std=c++11
 LDFLAGS+= -lpthread -lstdc++
