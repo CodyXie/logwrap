@@ -21,6 +21,7 @@
 #include <stdbool.h>
 
 #include <logwrap/alog.h>
+#include <logwrap/log_api.h>
 __BEGIN_DECLS
 
 /*
@@ -69,7 +70,7 @@ __BEGIN_DECLS
 #define LOG_KLOG        2
 #define LOG_FILE        4
 
-int android_fork_execvp_ext(int argc, char* argv[], int *status, bool ignore_int_quit,
+LOG_API int android_fork_execvp_ext(int argc, char* argv[], int *status, bool ignore_int_quit,
         int log_target, bool abbreviated, char *file_path);
 
 /* Similar to above, except abbreviated logging is not available, and if logwrap
@@ -82,9 +83,6 @@ static inline int android_fork_execvp(int argc, char* argv[], int *status,
     return android_fork_execvp_ext(argc, argv, status, ignore_int_quit,
                                    (logwrap ? LOG_ALOG : LOG_NONE), false, NULL);
 }
-
-#define os_fork_execvp_ext android_fork_execvp_ext
-#define os_fork_execvp android_fork_execvp
 
 __END_DECLS
 

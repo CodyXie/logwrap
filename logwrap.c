@@ -469,7 +469,7 @@ static void child(int argc, char* argv[]) {
     }
 }
 
-int android_fork_execvp_ext(int argc, char* argv[], int *status, bool ignore_int_quit,
+LOG_API int android_fork_execvp_ext(int argc, char* argv[], int *status, bool ignore_int_quit,
         int log_target, bool abbreviated, char *file_path) {
     pid_t pid;
     int parent_ptty;
