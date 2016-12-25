@@ -21,10 +21,6 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
-#ifndef __ANDROID__
-#include <bionic_libc/libc_logging.h>
-#endif
-
 #include <logwrap/logwrap.h>
 #include <cutils/klog.h>
 
