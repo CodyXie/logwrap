@@ -28,6 +28,7 @@
 
 #ifndef __ANDROID__
 #include <sys/user.h>
+#include <bits/uClibc_page.h>
 #endif
 
 #include <cutils/list.h>

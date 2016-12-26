@@ -1,11 +1,15 @@
-project(log)
+option(TARGET_USES_LOGD "Use logd or not." OFF)
 
-cmake_minimum_required(VERSION 2.8)
-set_property(GLOBAL PROPERTY TARGET_SUPPORTS_SHARED_LIBS TRUE)
+if(${TARGET_USES_LOGD})
+	set(LIBLOG_SRCS logd_write.c log_event_write.c log_read.c)
+else()
+	set(LIBLOG_SRCS logd_write_kern.c log_read_kern.c)
+endif()
 
-add_definitions(-DFAKE_LOG_DEVICE -DHAVE_SYS_UIO_H=1)
+set(LIBLOG_SRCS ${LIBLOG_SRCS} logprint.c event_tag_map.c)
+set(LIBLOG_SRCS ${LIBLOG_SRCS} fake_log_device.c)
 
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR} LIBLOG_SRCS)
+add_definitions(-DFAKE_LOG_DEVICE=1 -DHAVE_SYS_UIO_H=1 -DHAVE_WRITEV)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../include)
 
