@@ -1,7 +1,7 @@
 project(utils)
 
-cmake_minimum_required(VERSION 2.8)
-set_property(GLOBAL PROPERTY TARGET_SUPPORTS_SHARED_LIBS TRUE)
+set(CMAKE_C_FLAGS "-fPIC -DNDEBUG -O2 -D_FORTIFY_SOURCE=2 -fvisibility=default")
+set(CMAKE_CXX_FLAGS "-fPIC -DNDEBUG -O2 -D_FORTIFY_SOURCE=2 -fvisibility=default")
 
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR} LIBUTILS_SRCS)
 
