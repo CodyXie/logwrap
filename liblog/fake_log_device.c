@@ -278,22 +278,22 @@ static void configureInitialState(const char* pathName, LogState* logState)
     const char* fstr = getenv("ANDROID_PRINTF_LOG");
     LogFormat format;
     if (fstr == NULL) {
-        format = FORMAT_BRIEF;
+        format = FORMAT_THREADTIME;
     } else {
         if (strcmp(fstr, "brief") == 0)
             format = FORMAT_BRIEF;
         else if (strcmp(fstr, "process") == 0)
             format = FORMAT_PROCESS;
         else if (strcmp(fstr, "tag") == 0)
-            format = FORMAT_PROCESS;
+            format = FORMAT_TAG;
         else if (strcmp(fstr, "thread") == 0)
-            format = FORMAT_PROCESS;
+            format = FORMAT_THREAD;
         else if (strcmp(fstr, "raw") == 0)
-            format = FORMAT_PROCESS;
+            format = FORMAT_RAW;
         else if (strcmp(fstr, "time") == 0)
-            format = FORMAT_PROCESS;
+            format = FORMAT_TIME;
         else if (strcmp(fstr, "long") == 0)
-            format = FORMAT_PROCESS;
+            format = FORMAT_LONG;
         else
             format = (LogFormat) atoi(fstr);        // really?!
     }
@@ -413,12 +413,12 @@ static void showLog(LogState *state,
         break;
     case FORMAT_TIME:
         prefixLen = snprintf(prefixBuf, sizeof(prefixBuf),
-            "%s %-8s\n\t", timeBuf, tag);
+            "%s %-8s\t", timeBuf, tag);
         strcpy(suffixBuf, "\n"); suffixLen = 1;
         break;
     case FORMAT_THREADTIME:
         prefixLen = snprintf(prefixBuf, sizeof(prefixBuf),
-            "%s %5d %5d %c %-8s \n\t", timeBuf, pid, tid, priChar, tag);
+            "%s %5d %5d %c %-8s \t", timeBuf, pid, tid, priChar, tag);
         strcpy(suffixBuf, "\n"); suffixLen = 1;
         break;
     case FORMAT_LONG:
