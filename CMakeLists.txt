@@ -21,6 +21,7 @@ set(INSTALL_INC_DIR "${CMAKE_INSTALL_PREFIX}/include" CACHE PATH "Installing dir
 set(CMAKE_C_FLAGS "-fPIC -DNDEBUG -O2 -D_FORTIFY_SOURCE=2 -fvisibility=hidden")
 set(CMAKE_CXX_FLAGS "-fPIC -DNDEBUG -O2 -D_FORTIFY_SOURCE=2 -fvisibility=hidden")
 
+add_definitions(-DHAVE_ANDROID_LOG)
 add_definitions(-DFAKE_LOG_DEVICE -DHAVE_SYS_UIO_H)
 
 set(LOGWRAP_SRCS logwrap.c)
@@ -57,5 +58,3 @@ install(TARGETS logwrap logwrapper
 	LIBRARY DESTINATION "${INSTALL_LIB_DIR}"
 	RUNTIME DESTINATION "${INSTALL_BIN_DIR}"
 	)
-
-add_subdirectory(libutils)
