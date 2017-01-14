@@ -41,14 +41,14 @@ set_target_properties(logwrap PROPERTIES LINKER_LANGUAGE CXX)
 
 target_link_libraries(logwrap
     pthread
-    android_cutils
+    cutils
     utils
     log
     )
 
 target_link_libraries(logwrapper
     pthread
-    android_cutils
+    cutils
     logwrap
     )
 
@@ -58,6 +58,4 @@ install(TARGETS logwrap logwrapper
 	RUNTIME DESTINATION "${INSTALL_BIN_DIR}"
 	)
 
-add_subdirectory(libcutils)
 add_subdirectory(libutils)
-add_subdirectory(liblog)
